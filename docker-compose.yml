@@ -1,0 +1,21 @@
+version: '3'
+services:
+  nebula_dev:
+    build:
+      context: ./build
+      args:
+        username: ${USERNAME}
+        password: ${PASSWORD}
+    image: goldenriver/nebula_dev
+    volumes:
+      - "./user_home:/home/${USERNAME}"
+    ports:
+      - "8022:22"
+    networks:
+      - developer
+    hostname: nebula-docker
+    privileged: true 
+
+networks:
+  developer:
+
