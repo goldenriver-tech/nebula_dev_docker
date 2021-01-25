@@ -30,6 +30,8 @@ RUN apt-get update && apt-get install -y ccache vim tmux sudo bash-completion \
             gnome-terminal dbus-x11 netcat meld tree gitk \
             silversearcher-ag chrpath diffstat gawk locales
 
+RUN pip3 install pipenv
+
 RUN locale-gen en_US.UTF-8
 
 RUN apt-get clean && \
