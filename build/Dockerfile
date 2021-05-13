@@ -4,6 +4,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 ARG username
 ARG password
+ARG timezone
 
 RUN apt-get update && apt-get install -y openssh-server
 RUN mkdir /var/run/sshd
@@ -16,17 +17,24 @@ RUN adduser $username plugdev
 RUN sed -ri 's/^#?#X11UseLocalhost\s+.*/X11UseLocalhost no/' /etc/ssh/sshd_config
 RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
 
-#RUN echo <your timezone> > /etc/timezone 
+RUN echo $timezone > /etc/timezone
 
-RUN apt-get update && apt-get install -y texinfo libglib2.0-dev liblz4-tool autoconf \
-            libtool libsdl-dev build-essential golang git build-essential \
-            curl unzip e2tools automake bison flex uml-utilities libcap-dev \
-            libattr1-dev ant uml-utilities bc libssl-dev expect gcc-aarch64-linux-gnu \
-            cpio g++-aarch64-linux-gnu net-tools dnsmasq iptables \ 
-            jq rsync libsdl2-dev sshpass libswitch-perl doxygen graphviz \
-            bsdmainutils python3-yaml cmake python3-pip iproute2
+RUN apt-get update
 
-RUN apt-get update && apt-get install -y ccache vim tmux sudo bash-completion \
+RUN apt-get install -y texinfo libglib2.0-dev liblz4-tool autoconf \
+            libtool libsdl-dev build-essential golang git \
+            curl zip unzip e2tools automake bison flex uml-utilities libcap-dev \
+            libattr1-dev ant uml-utilities bc libssl-dev expect \
+            cpio net-tools dnsmasq iptables jq rsync iproute2 \
+            libsdl2-dev sshpass libswitch-perl doxygen graphviz \
+            bsdmainutils python python-pip python-dev python-networkx \
+            python3-yaml cmake python3-pip openjdk-11-jdk-headless
+
+RUN apt-get install -y git-core gnupg zlib1g-dev gcc-multilib g++-multilib \
+            libc6-dev-i386 lib32ncurses5-dev x11proto-core-dev libx11-dev \
+            lib32z1-dev libgl1-mesa-dev libxml2-utils xsltproc unzip fontconfig
+
+RUN apt-get install -y ccache vim tmux sudo bash-completion \
             gnome-terminal dbus-x11 netcat meld tree gitk \
             silversearcher-ag chrpath diffstat gawk locales
 

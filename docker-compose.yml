@@ -6,6 +6,7 @@ services:
       args:
         username: ${USERNAME}
         password: ${PASSWORD}
+        timezone: ${TIMEZONE}
     image: goldenriver/nebula_dev
     volumes:
       - "./user_home:/home/${USERNAME}"

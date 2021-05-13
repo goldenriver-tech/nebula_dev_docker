@@ -11,7 +11,7 @@ https://docs.docker.com/docker-for-mac/install/
 ## 2. Create and start a new container
 
 ```
-### Change username and password (default: nebula/nebula)
+### Change username, password and timezone
 $ vi .env
 
 ### Creating new container
