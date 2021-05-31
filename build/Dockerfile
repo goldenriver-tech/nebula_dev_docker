@@ -35,9 +35,13 @@ RUN apt-get install -y git-core gnupg zlib1g-dev gcc-multilib g++-multilib \
             lib32z1-dev libgl1-mesa-dev libxml2-utils xsltproc fontconfig
 
 RUN apt-get install -y ccache vim tmux sudo bash-completion \
-            gnome-terminal dbus-x11 netcat meld tree gitk \
+            gnome-terminal dbus-x11 netcat meld tree software-properties-common \
             silversearcher-ag chrpath diffstat gawk locales \
-            p7zip-full
+            p7zip-full cscope
+
+RUN add-apt-repository ppa:git-core/ppa
+RUN apt-get update
+RUN apt-get install -y git
 
 RUN pip3 install pipenv
 
