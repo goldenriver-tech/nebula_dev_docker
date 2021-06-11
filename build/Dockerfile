@@ -37,7 +37,7 @@ RUN apt-get install -y git-core gnupg zlib1g-dev gcc-multilib g++-multilib \
 RUN apt-get install -y ccache vim tmux sudo bash-completion \
             gnome-terminal dbus-x11 netcat meld tree software-properties-common \
             silversearcher-ag chrpath diffstat gawk locales \
-            p7zip-full cscope
+            p7zip-full cscope socat
 
 RUN apt-get update && apt-get install -y adwaita-icon-theme-full
 
