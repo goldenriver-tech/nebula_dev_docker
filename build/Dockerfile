@@ -37,7 +37,7 @@ RUN apt-get install -y git-core gnupg zlib1g-dev gcc-multilib g++-multilib \
 RUN apt-get install -y ccache vim tmux sudo bash-completion \
             gnome-terminal dbus-x11 netcat meld tree software-properties-common \
             silversearcher-ag chrpath diffstat gawk locales \
-            p7zip-full cscope socat
+            p7zip-full cscope socat clang-format
 
 RUN apt-get update && apt-get install -y adwaita-icon-theme-full
 
@@ -48,6 +48,8 @@ RUN apt-get install -y git
 RUN pip3 install pipenv
 
 RUN locale-gen en_US.UTF-8
+
+RUN sed -ri 's/^%sudo\s+ALL=\(ALL:ALL\)\s+ALL/%sudo ALL=(ALL:ALL) NOPASSWD:ALL/' /etc/sudoers
 
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
