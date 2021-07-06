@@ -31,5 +31,18 @@ jobs:
       - name: Install sshpass package
         run: sudo apt-get install sshpass
 
-      - name: Install sshpass package
-        run: sshpass -p "nebula" ./run_cmd.sh echo "hello"
+      - name: Check container status by docker command
+        run: docker ps -a
+
+      - name: Update SSH known host
+        run: |
+          mkdir -p $HOME/.ssh
+          chmod 700 $HOME/.ssh
+          touch $HOME/.ssh/known_hosts
+          chmod 600 $HOME/.ssh/known_hosts
+          ssh-keygen -R [127.0.0.1]:8022 -f $HOME/.ssh/known_hosts
+          ssh-keyscan -t rsa -p 8022 127.0.0.1 >> $HOME/.ssh/known_hosts
+          ssh-keygen -H -f $HOME/.ssh/known_hosts
+
+      - name: Check container status by executing shell command in container
+        run: ./nebula_dev_shell.sh echo "hello"
