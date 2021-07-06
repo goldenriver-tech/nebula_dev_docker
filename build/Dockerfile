@@ -20,7 +20,6 @@ RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
 RUN echo $timezone > /etc/timezone
 
 RUN apt-get update --fix-missing
-
 RUN apt-get install -y texinfo libglib2.0-dev liblz4-tool autoconf \
             libtool libsdl-dev build-essential golang git \
             curl zip unzip e2tools automake bison flex uml-utilities libcap-dev \
@@ -34,12 +33,16 @@ RUN apt-get install -y git-core gnupg zlib1g-dev gcc-multilib g++-multilib \
             libc6-dev-i386 lib32ncurses5-dev x11proto-core-dev libx11-dev \
             lib32z1-dev libgl1-mesa-dev libxml2-utils xsltproc fontconfig
 
+RUN apt-get update --fix-missing
 RUN apt-get install -y ccache vim tmux sudo bash-completion \
-            gnome-terminal dbus-x11 netcat meld tree software-properties-common \
+            gnome-terminal dbus-x11 netcat-openbsd meld tree software-properties-common \
             silversearcher-ag chrpath diffstat gawk locales \
             p7zip-full cscope socat clang-format
 
-RUN apt-get update && apt-get install -y adwaita-icon-theme-full
+RUN apt-get install -y adwaita-icon-theme-full
+
+RUN apt-get install -y inetutils-ping inetutils-traceroute dnsutils \
+            inetutils-tools autossh
 
 RUN add-apt-repository ppa:git-core/ppa
 RUN apt-get update
